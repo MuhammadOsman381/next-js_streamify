@@ -1,0 +1,42 @@
+import dbConnection from "@/lib/dbConnection.js";
+import { NextResponse } from "next/server";
+import Post from "@/models/Post.model.js";
+import Channel from "@/models/Channel.model.js";
+
+export async function GET(req) {
+  try {
+    await dbConnection();
+    const channelID = req.url.split("get/")[1];
+    const channel = await Channel.findById(channelID);
+
+    if (!channel) {
+      return NextResponse.json(
+        { success: false, message: "Channel not found." },
+        { status: 404 }
+      );
+    }
+
+    const postArray = await Promise.all(
+      channel.posts.map(async (postId) => {
+        const post = await Post.findById(postId);
+        return post;
+      })
+    );
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Posts retrieved successfully.",
+        channel: [channel],
+        posts: postArray,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return NextResponse.json(
+      { success: false, message: "Server error, please try again later." },
+      { status: 500 }
+    );
+  }
+}
