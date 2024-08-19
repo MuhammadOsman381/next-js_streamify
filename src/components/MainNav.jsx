@@ -26,7 +26,7 @@ const MainNav = () => {
           </label>
         </div>
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">streamify</a>
         </div>
       </div>
 
@@ -48,7 +48,7 @@ const MainNav = () => {
               </li>
             </Link>
 
-            <Link href={"/main/create-post"}>
+            <Link href={"/main/liked-videos"}>
               <li className="hover:scale-105 transition-transform">
                 <span>Liked Videos</span>
               </li>

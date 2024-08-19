@@ -40,7 +40,7 @@ export async function POST(req) {
         "image"
       );
       const imageFileName = `${Date.now()}-${image.name}`;
-      imagePath = `http://192.168.18.12:3000/uploads/image/${imageFileName}`;
+      imagePath = `http://192.168.56.1:3000/uploads/image/${imageFileName}`;
       const imageFilePath = path.join(imageUploadDir, imageFileName);
 
       if (!fs.existsSync(imageUploadDir)) {
@@ -60,13 +60,12 @@ export async function POST(req) {
         "banner"
       );
       const bannerFileName = `${Date.now()}-${banner.name}`;
-      bannerPath = `http://192.168.18.12:3000/uploads/banner/${bannerFileName}`;
+      bannerPath = `http://192.168.56.1:3000/uploads/banner/${bannerFileName}`;
       const bannerFilePath = path.join(bannerUploadDir, bannerFileName);
 
       if (!fs.existsSync(bannerUploadDir)) {
         fs.mkdirSync(bannerUploadDir, { recursive: true });
       }
-
       fs.writeFileSync(bannerFilePath, buffer);
     }
 

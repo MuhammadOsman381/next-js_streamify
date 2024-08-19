@@ -15,7 +15,6 @@ export async function GET(req) {
         { status: 404 }
       );
     }
-
     const postArray = await Promise.all(
       channel.posts.map(async (postId) => {
         const post = await Post.findById(postId);

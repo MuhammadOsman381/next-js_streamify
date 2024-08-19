@@ -7,7 +7,7 @@ const Profile = (props) => {
     <div>
       <div className="flex flex-col items-center justify-center ">
         {/* Banner Section */}
-        <div className="w-full h-40 sm:h-60 md:h-72 lg:h-80 xl:h-65 relative overflow-hidden rounded-lg">
+        <div className="w-full h-20 sm:h-60 md:h-72 lg:h-80 xl:h-65 relative overflow-hidden rounded-lg">
           <img
             src={props.banner}
             className="w-full h-full object-cover"

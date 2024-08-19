@@ -44,7 +44,7 @@ export async function POST(req) {
         "video"
       );
       const videoFileName = `${Date.now()}-${video.name}`;
-      videoPath = `http://192.168.18.12:3000/uploads/video/${videoFileName}`;
+      videoPath = `http://192.168.56.1:3000/uploads/video/${videoFileName}`;
       const videoFilePath = path.join(videoUploadDir, videoFileName);
 
       if (!fs.existsSync(videoUploadDir)) {
@@ -64,7 +64,7 @@ export async function POST(req) {
         "thumbnail"
       );
       const thumbnailFileName = `${Date.now()}-${thumbnail.name}`;
-      thumbnailPath = `http://192.168.18.12:3000/uploads/thumbnail/${thumbnailFileName}`;
+      thumbnailPath = `http://192.168.56.1:3000/uploads/thumbnail/${thumbnailFileName}`;
       const thumbnailFilePath = path.join(
         thumbnailUploadDir,
         thumbnailFileName

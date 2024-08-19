@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import Channel from "@/models/Channel.model.js";
 import Post from "@/models/Post.model.js";
+import User from "@/models/User.model.js";
 
 export async function GET(req) {
   try {
@@ -10,6 +11,7 @@ export async function GET(req) {
     const postID = req.url.split("like/")[1];
     const token = req.headers.get("x-access-token");
     const decodedToken = jwt.decode(token);
+    const user = await User.findOne({ _id: decodedToken.userId });
 
     if (!decodedToken || !decodedToken.userId) {
       return NextResponse.json(
@@ -20,17 +22,21 @@ export async function GET(req) {
 
     const post = await Post.findOne({ _id: postID });
 
-    if (post.likes.includes(decodedToken.userId)) {
+    if (post.likes.includes(decodedToken.userId) && user.likedVideos.includes(postID) ) {
+      user.likedVideos = user.likedVideos.filter(
+        (sub) => sub.toString() !== postID
+      );
       post.likes = post.likes.filter(
         (sub) => sub.toString() !== decodedToken.userId
       );
+      
     } else {
       post.likes.push(decodedToken.userId);
+      user.likedVideos.push(post._id);
     }
 
+    await user.save();
     await post.save();
-
-    console.log(post.likes);
 
     return NextResponse.json(
       {

@@ -3,8 +3,11 @@ import Footer from "@/components/Footer";
 import Helpers from "@/config/Helpers";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaPlay } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { FaEye } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa";
+import { PiTelevisionFill } from "react-icons/pi";
+
 const page = () => {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
@@ -51,56 +54,44 @@ const page = () => {
     <>
       <div className="min-h-[100vh] p-10">
         <div className="flex flex-row flex-wrap items-center justify-center gap-10">
-          {posts?.length > 0 ? (
-            posts?.map((items) => (
-              <div
-                key={items.id}
-                onClick={() => single_post(items._id)}
-                className="card card-compact hover:scale-105 cursor-pointer transition-transform bg-base-100 w-96 shadow-xl"
-              >
-                <figure className="relative">
-                  <img src={items.thumbnail} alt="Thumbnail" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-90  transition-opacity">
-                    <FaPlay className="text-white hover:scale-110 transition-transform text-4xl" />
-                  </div>
+          {posts?.length > 0 &&
+            posts.map((items) => (
+              <div className="hover:scale-105 transition-transform card bg-base-100 image-full w-96 shadow-xl">
+                <figure>
+                  <img src={items.thumbnail} alt="Shoes" />
                 </figure>
-                <div className="px-6 py-3 mb-3 ">
-                  <h2 className="card-title">{truncate(items.title, 4)}</h2>
-                  <p>{truncate(items.description, 5)}</p>
+                <div className="card-body ">
+                  <h2 className="card-title hover:scale-105 transition-transform">{truncate(items.title, 5)}</h2>
+                  <p className="hover:scale-105 transition-transform" >{truncate(items.description, 4)}</p>
 
-                  <div className="flex flex-wrap gap-2 mt-2 ">
-                    <div className="flex flex-row  text-[13px]">
-                      <p className="font-normal w-auto h-auto text-gray-600">
-                        Likes:
+                  <div className="flex flex-row gap-5">
+                    <span className="hover:scale-105 transition-transform flex flex-row items-center justify-center gap-1 w-7 ">
+                      <p >
+                        <FaHeart className="text-red-600" />
                       </p>
-                      <p className="font-light w-auto h-auto text-gray-500">
-                        {items?.likes?.length}
-                      </p>
-                    </div>
-                    <div className="flex flex-row  text-[13px]">
-                      <p className="font-normal w-auto h-auto text-gray-600">
-                        Views:
-                      </p>
-                      <p className="font-light w-auto h-auto text-gray-500">
-                        {items?.views?.length}
-                      </p>
-                    </div>
 
-                    <div className="flex flex-row  text-[13px]">
-                      <p className="font-normal w-auto h-auto text-gray-600">
-                        Uploaded-At:
+                      <p>{items?.likes?.length}</p>
+                    </span>
+
+                    <span className="hover:scale-105 transition-transform flex flex-row items-center justify-center gap-1 w-7 ">
+                      <p>
+                        <PiTelevisionFill className="text-blue-600" />
                       </p>
-                      <p className="font-light w-auto h-auto text-gray-500">
-                        {new Date(items?.updatedAt).toLocaleString()}
-                      </p>
-                    </div>
+
+                      <p>{items?.views?.length}</p>
+                    </span>
+                  </div>
+
+                  <div className=" card-actions justify-end">
+                    <button
+                    onClick={()=>single_post(items?._id)}
+                     className=" hover:scale-110 transition-transform btn btn-error btn-sm text-white ">
+                      Watch <FaEye />
+                    </button>
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div>Currently no posts are available!</div>
-          )}
+            ))}
         </div>
       </div>
       <Footer />

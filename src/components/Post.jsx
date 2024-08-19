@@ -54,7 +54,7 @@ const Post = (props) => {
                 </div>
               </figure>
               <div className="px-5 py-2">
-                <h2 className="card-title text-lg ">{items.title}</h2>
+                <h2 className="card-title text-lg ">{truncate(items.title, 5)}</h2>
                 <p>{truncate(items.description, 5)}</p>
                 <div className="flex flex-row gap-1 text-[13px]">
                   <p className="font-normal w-auto h-auto text-gray-600">

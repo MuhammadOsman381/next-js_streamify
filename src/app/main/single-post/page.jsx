@@ -19,7 +19,7 @@ const Page = () => {
   const [likes, setLikes] = useState("");
   const [channelID, setChannelID] = useState("");
   const [refresher, setRefresher] = useState(false);
-
+  const [updated,setUpdated]= useState("");
   const [views, setViews] = useState("");
   const [date, setDate] = useState("");
 
@@ -32,7 +32,8 @@ const Page = () => {
       );
       console.log(response.data.post.likes.length);
 
-      setDate(new Date(response.data.post.updatedAt).toLocaleString());
+      setDate(new Date(response.data.post.createdAt).toLocaleString());
+      setUpdated(new Date(response.data.post.updatedAt).toLocaleString())
       setViews(response?.data?.post?.views?.length);
       const postData = await response.data.post;
       setIsSubscribed(response.data.isSubsscribed);
@@ -100,13 +101,23 @@ const Page = () => {
               {channelImage && channelName ? (
                 <>
                   <div className="flex flex-row gap-4 items-start justify-start">
-                    <p className="font-light text-gray-500 text-sm">
+                    <p className="font-normal text-gray-500 text-sm">
                       {`${views} • Views`}
                     </p>
-                    <p className="font-light text-gray-500 text-sm">
+                    <p className="font-normal text-gray-500 text-sm">
                       {`${likes} • Likes`}
                     </p>
+                    <span className="flex gap-1" >
+                    <p className="font-normal text-gray-500 text-sm">uploaded_At:</p>
                     <p className="font-light text-gray-500 text-sm">{date}</p>
+                    </span>
+
+
+                    <span className="flex gap-1" >
+                    <p className="font-normal text-gray-500 text-sm">updated_At:</p>
+                    <p className="font-light text-gray-500 text-sm">{updated}</p>
+                    </span>
+
                   </div>
                 </>
               ) : (

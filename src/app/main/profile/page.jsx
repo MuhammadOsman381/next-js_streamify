@@ -63,6 +63,7 @@ const Page = () => {
               <p className="text-sm sm:text-base md:text-lg text-gray-600">
                 {description}
               </p>
+
               <div className="flex gap-1 mt-5 ">
                 <button className="btn btn-primary  text-white btn-sm hover:scale-110 transition-transform rounded-xl">
                   Edit <CiEdit />
