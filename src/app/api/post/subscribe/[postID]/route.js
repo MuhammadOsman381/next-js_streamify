@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import Channel from "@/models/Channel.model.js";
 import Post from "@/models/Post.model.js";
-
+import User from "@/models/User.model.js";
 export async function GET(req) {
   try {
     await dbConnection();
@@ -17,7 +17,7 @@ export async function GET(req) {
         { status: 401 }
       );
     }
-
+    const user = await User.findOne({ _id: decodedToken.userId });
     const post = await Post.findOne({ _id: postID });
     const channel = await Channel.findOne({ _id: post.channelID });
 
@@ -32,14 +32,15 @@ export async function GET(req) {
       channel.subscriber = channel.subscriber.filter(
         (sub) => sub.toString() !== decodedToken.userId
       );
+      user.subscribedChannels = user.subscribedChannels.filter(
+        (sub) => sub.toString() !== channel._id.toString()
+      );
     } else {
       channel.subscriber.push(decodedToken.userId);
+      user.subscribedChannels.push(channel._id);
     }
-
+    await user.save();
     await channel.save();
-
-    console.log(channel.subscriber);
-
     return NextResponse.json(
       {
         success: true,

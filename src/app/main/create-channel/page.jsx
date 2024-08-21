@@ -4,7 +4,6 @@ import Helpers from "@/config/Helpers";
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { GrChannel } from "react-icons/gr";
 import { IoPersonAdd } from "react-icons/io5";
 
 const Page = () => {
@@ -33,7 +32,6 @@ const Page = () => {
     formData.append("description", description);
     formData.append("image", profileImage);
     formData.append("banner", bannerImage);
-
     axios.post("/api/channel/create", formData, Helpers.authFileHeaders)
     .then((response)=>{
       toast.success(response.data.message)
@@ -42,8 +40,6 @@ const Page = () => {
       console.log(error)
     })
   };
-
-  
 
   return (
     <>

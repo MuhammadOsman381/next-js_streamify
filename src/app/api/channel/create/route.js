@@ -15,7 +15,6 @@ export async function POST(req) {
     const description = formData.get("description");
     const image = formData.get("image");
     const banner = formData.get("banner");
-
     const token = req.headers.get("x-access-token");
     const decodedToken = jwt.decode(token);
 
@@ -29,7 +28,6 @@ export async function POST(req) {
         { status: 409 }
       );
     }
-
     let imagePath = null;
     if (image) {
       const buffer = Buffer.from(await image.arrayBuffer());
@@ -40,7 +38,7 @@ export async function POST(req) {
         "image"
       );
       const imageFileName = `${Date.now()}-${image.name}`;
-      imagePath = `http://192.168.56.1:3000/uploads/image/${imageFileName}`;
+      imagePath = `${process.env.URL}/uploads/image/${imageFileName}`;
       const imageFilePath = path.join(imageUploadDir, imageFileName);
 
       if (!fs.existsSync(imageUploadDir)) {
@@ -60,7 +58,7 @@ export async function POST(req) {
         "banner"
       );
       const bannerFileName = `${Date.now()}-${banner.name}`;
-      bannerPath = `http://192.168.56.1:3000/uploads/banner/${bannerFileName}`;
+      bannerPath = `${process.env.URL}/uploads/banner/${bannerFileName}`;
       const bannerFilePath = path.join(bannerUploadDir, bannerFileName);
 
       if (!fs.existsSync(bannerUploadDir)) {

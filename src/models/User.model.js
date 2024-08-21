@@ -20,10 +20,10 @@ const UserSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Channel",
   },
-  watchLater: [
+  subscribedChannels: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post",
+      ref: "Channel",
     },
   ],
   likedVideos: [
