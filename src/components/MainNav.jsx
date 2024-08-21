@@ -54,6 +54,12 @@ const MainNav = () => {
               </li>
             </Link>
 
+            <Link href={"/main/subscription"}>
+              <li className="hover:scale-105 transition-transform">
+                <span>Subscribed Channels</span>
+              </li>
+            </Link>
+
             <Link href={"/main/create-channel"}>
               <li className="hover:scale-105 transition-transform">
                 <span>Create Channel</span>

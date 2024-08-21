@@ -4,7 +4,7 @@ import { FaPlay } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import Footer from "./Footer";
+
 const ChannelProfile = (props) => {
   const router = useRouter();
 

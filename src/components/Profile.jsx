@@ -1,7 +1,8 @@
 import React from "react";
-import Image from "next/image";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+
+
 const Profile = (props) => {
   return (
     <div>

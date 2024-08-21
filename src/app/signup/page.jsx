@@ -4,6 +4,7 @@ import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import toast from "react-hot-toast";
 const Home = () => {
   const router = useRouter();
   const [name, setName] = useState("");
@@ -19,13 +20,13 @@ const Home = () => {
     axios
       .post("/api/user/signup", formData)
       .then((response) => {
-        console.log(response);
+        toast.success(response.data.message);
+        router.push("/")
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   return (
     <div>
       <NavBar />

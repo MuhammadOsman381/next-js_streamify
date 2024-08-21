@@ -4,14 +4,13 @@ import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 const Home = () => {
   const router = useRouter();
   router.push("/main");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const loginUser = () => {
-    console.log(email, password);
     const formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
@@ -20,6 +19,8 @@ const Home = () => {
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
+        toast.success(response.data.message);
+        router.push("/main");
       })
       .catch((error) => {
         console.log(error);

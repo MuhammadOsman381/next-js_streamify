@@ -1,19 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Profile from "@/components/Profile";
-import Post from "@/components/Post";
 import axios from "axios";
 import Helpers from "@/config/Helpers";
-import { CiEdit } from "react-icons/ci";
-import { MdDelete } from "react-icons/md";
 import ChannelProfile from "@/components/ChannelProfile";
 import Footer from "@/components/Footer";
 
 const page = () => {
-  // const [banner, setBanner] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [image, setImage] = useState("");
-  // const [name, setName] = useState("");
   const [channel, setChannel] = useState([]);
   const [posts, setPosts] = useState([]);
 
