@@ -12,7 +12,7 @@ const Home = () => {
   const [password, setPassword] = useState("");
 
   const signupUser =  () => {
-    console.log(name, email, password);
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -31,7 +31,7 @@ const Home = () => {
     <div>
       <NavBar />
       <div className=" font-[sans-serif]">
-        <div className=" min-h-screen flex fle-col -mt-10 items-center justify-center py-6 px-4">
+        <div className=" min-h-screen flex fle-col  items-center justify-center py-6 px-4">
           <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full">
             <div className="border-none bg-white rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto">
               <form className="space-y-4">
@@ -46,7 +46,7 @@ const Home = () => {
 
                 <div>
                   <label className="text-gray-800 text-sm mb-2 block">
-                    Email
+                    Name
                   </label>
                   <div className="relative flex items-center">
                     <input

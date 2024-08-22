@@ -2,12 +2,16 @@ import dbConnection from "@/lib/dbConnection.js";
 import { NextResponse } from "next/server";
 import Post from "@/models/Post.model.js";
 import Channel from "@/models/Channel.model.js";
+import User from "@/models/User.model.js";
+import jwt from "jsonwebtoken";
 
 export async function GET(req) {
   try {
     await dbConnection();
     const channelID = req.url.split("get/")[1];
     const channel = await Channel.findById(channelID);
+    const decodedToken = jwt.decode(req.headers.get("x-access-token"));
+    const user = await User.findOne({ _id: decodedToken.userId });
 
     if (!channel) {
       return NextResponse.json(
@@ -28,6 +32,7 @@ export async function GET(req) {
         message: "Posts retrieved successfully.",
         channel: [channel],
         posts: postArray,
+        isChannelSubscribed: user.subscribedChannels.includes(channelID),
       },
       { status: 200 }
     );

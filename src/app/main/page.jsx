@@ -40,8 +40,6 @@ const page = () => {
       })
       .catch((error) => {
         setIsLoading(false)
-
-        console.log(error);
       });
   };
 
@@ -97,6 +95,7 @@ const page = () => {
                 </button>
               </div>
             </div>
+            
           </div>
         )):
         <div>

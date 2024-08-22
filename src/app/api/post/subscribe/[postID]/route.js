@@ -7,7 +7,7 @@ import User from "@/models/User.model.js";
 export async function GET(req) {
   try {
     await dbConnection();
-    const postID = req.url.split("subscribe/")[1];
+    const channelID = req.url.split("subscribe/")[1];
     const token = req.headers.get("x-access-token");
     const decodedToken = jwt.decode(token);
 
@@ -18,8 +18,7 @@ export async function GET(req) {
       );
     }
     const user = await User.findOne({ _id: decodedToken.userId });
-    const post = await Post.findOne({ _id: postID });
-    const channel = await Channel.findOne({ _id: post.channelID });
+    const channel = await Channel.findOne({ _id: channelID });
 
     if (!channel) {
       return NextResponse.json(

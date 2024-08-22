@@ -4,7 +4,6 @@ import Helpers from "@/config/Helpers";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { AiFillLike } from "react-icons/ai";
 import { FaBell } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
@@ -61,10 +60,9 @@ const Page = () => {
     }
   };
 
-  const subscribeUser = async () => {
-    const postID = await localStorage.getItem("postID");
+  const subscribeUser = async (channelID) => {
     const response = await axios.get(
-      `/api/post/subscribe/${postID}`,
+      `/api/post/subscribe/${channelID}`,
       Helpers.authHeaders
     );
     setRefresher(!refresher);
@@ -117,20 +115,11 @@ const Page = () => {
                       {`${post.likes.length} • Likes`}
                     </p>
                     <span className="flex gap-1">
-                      <p className="font-normal text-gray-500 text-sm">
+                      {/* <p className="font-normal text-gray-500 text-sm">
                         uploaded_At:
-                      </p>
+                      </p> */}
                       <p className="font-light text-gray-500 text-sm">
                         {new Date(post.createdAt).toLocaleString()}
-                      </p>
-                    </span>
-
-                    <span className="flex gap-1">
-                      <p className="font-normal text-gray-500 text-sm">
-                        updated_At:
-                      </p>
-                      <p className="font-light text-gray-500 text-sm">
-                        {new Date(post.updatedAt).toLocaleString()}
                       </p>
                     </span>
                   </div>
@@ -158,7 +147,7 @@ const Page = () => {
                     </p>
                     <div className="flex gap-3">
                       <button
-                        onClick={subscribeUser}
+                        onClick={()=>subscribeUser(channel._id)}
                         className="mt-2 px-4 py-1 opacity-80  hover:opacity-100 bg-red-600 flex items-center justify-center gap-2 text-white text-sm rounded-lg shadow hover:bg-red-700  hover:scale-110 cursor-pointer transition-transform"
                       >
                         {isSubscribed ? (

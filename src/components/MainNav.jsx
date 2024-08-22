@@ -1,7 +1,22 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const MainNav = () => {
+  const router = useRouter();
+  const logout_user = () => {
+    toast.success("User logout succesfully!");
+    const daysToExpire = 0;
+    const expires = new Date(
+      Date.now() + daysToExpire * 24 * 60 * 60 * 1000
+    ).toUTCString();
+    document.cookie = `token=null; expires=${expires}; path=/; SameSite=Lax; Secure`;
+    localStorage.clear();
+    router.push("/");
+  };
+
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -32,7 +47,7 @@ const MainNav = () => {
 
       <div className="drawer  z-50">
         <input id="my-drawer" type="checkbox" className="drawer-toggle  " />
-        
+
         <div className="drawer-side">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
@@ -72,11 +87,14 @@ const MainNav = () => {
               </li>
             </Link>
 
-            <Link href={"/"}>
-              <li className="hover:scale-105 transition-transform  w-24  ">
-                <span className="btn btn-primary btn-sm">Logout</span>
-              </li>
-            </Link>
+            {/* <Link href={"/"}> */}
+            <li
+              onClick={logout_user}
+              className="hover:scale-105 transition-transform  w-24  "
+            >
+              <span className="btn btn-primary btn-sm">Logout</span>
+            </li>
+            {/* </Link> */}
           </ul>
         </div>
       </div>

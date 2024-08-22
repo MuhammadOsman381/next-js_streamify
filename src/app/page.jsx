@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 const Home = () => {
   const router = useRouter();
-  router.push("/main");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const loginUser = () => {
@@ -17,7 +17,6 @@ const Home = () => {
     axios
       .post("/api/user/signin", formData)
       .then((response) => {
-        console.log(response);
         localStorage.setItem("token", response.data.token);
         toast.success(response.data.message);
         router.push("/main");
